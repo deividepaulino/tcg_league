@@ -2,6 +2,8 @@ sealed class LoginStates {}
 
 class LoginLoadingState extends LoginStates {}
 
+class LoginInitialState extends LoginStates {}
+
 class LoginSuccessState extends LoginStates {
   final String token;
 

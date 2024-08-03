@@ -6,9 +6,7 @@ class LoginModule extends Module {
   List<Module> get imports => [];
 
   @override
-  final List<ModularRoute> routes = [
-    // Modular.initialRoute : (context, args) => const LoginPage(),
-
-    ChildRoute('/', child: (_, args) => const LoginPage()),
-  ];
+  void routes(r) {
+    r.child('/', child: (context) => const LoginPage());
+  }
 }
