@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:tcg_league/core/themes/theme_base.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
@@ -9,7 +10,7 @@ class AppWidget extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'TCG League',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeBase.themeData,
       routerConfig: Modular.routerConfig,
     ); //added by extension
   }

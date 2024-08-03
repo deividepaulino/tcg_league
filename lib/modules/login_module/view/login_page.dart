@@ -1,5 +1,6 @@
 import 'package:asp/asp.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcg_league/modules/login_module/controller/login_controller.dart';
 import 'package:tcg_league/modules/login_module/view/atoms/login_atoms.dart';
 import 'package:tcg_league/modules/login_module/view/states/login_states.dart';
@@ -18,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final state = context.select(() => loginState.value);
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       body: Center(
         child: Card(
           elevation: 10,
@@ -74,7 +76,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _buildSuccess() {
-    return Container();
+    Modular.to.pushNamed('/index/');
+
+    return const Center(child: CircularProgressIndicator());
   }
 
   _buildError() {
