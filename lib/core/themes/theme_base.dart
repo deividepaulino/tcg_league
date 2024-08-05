@@ -7,7 +7,7 @@ class ThemeBase {
       primarySwatch: Colors.red,
       primaryColorLight: const Color.fromARGB(255, 1, 165, 253),
       primaryColorDark: Colors.blue.shade700,
-      primaryColor: const Color.fromARGB(255, 24, 14, 109),
+      primaryColor: Color.fromARGB(255, 10, 3, 68),
       fontFamily: 'Montserrat',
       scaffoldBackgroundColor: Colors.grey.shade200,
       colorScheme: ColorScheme.fromSwatch().copyWith(

@@ -14,7 +14,7 @@ class IndexController {
       "challange_initial_date": "2021-10-10",
       "challange_final_date": "2021-10-15",
       "challange_type": "Liga",
-      "challange_status": "open",
+      "challange_status": "live",
       "total_participants": 10,
       "user_position": 1,
       "user_points": 100,
