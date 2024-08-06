@@ -23,6 +23,12 @@ class _IndexPageState extends State<IndexPage> {
   }
 
   @override
+  void dispose() {
+    indexState.setValue(IndexInitialState());
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final state = context.select(() => indexState.value);
     return Scaffold(

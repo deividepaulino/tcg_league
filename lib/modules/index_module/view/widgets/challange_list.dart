@@ -94,7 +94,7 @@ class IndexChallangeListState extends State<IndexChallangeList> {
                                   style: TextStyle(color: Colors.white))
                               : (widget.challanges[index].challangeStatus ==
                                       'live')
-                                  ? const Text('Ao vivo',
+                                  ? const Text('Jogando',
                                       style: TextStyle(color: Colors.white))
                                   : const Text('Fechado',
                                       style: TextStyle(color: Colors.white)),
