@@ -30,6 +30,12 @@ class _CustomBottomMenuState extends State<CustomBottomMenu> {
           if (i == 2) {
             Modular.to.pushNamedAndRemoveUntil('/join/', (route) => false);
           }
+          if (i == 3) {
+            Modular.to.pushNamedAndRemoveUntil('/history/', (route) => false);
+          }
+          if (i == 4) {
+            Modular.to.pushNamedAndRemoveUntil('/profile/', (route) => false);
+          }
         }
       },
       items: [
