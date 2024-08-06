@@ -211,7 +211,7 @@ class DeckController {
   getChallangeList() async {
     deckState.setValue(DeckLoadingState());
 
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
 
     // indexState.setValue(
     //   DeckSuccessState(
@@ -228,6 +228,6 @@ class DeckController {
   }
 
   getProfileInfo() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
   }
 }

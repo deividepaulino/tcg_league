@@ -65,7 +65,7 @@ class IndexController {
   getChallangeList() async {
     // indexState.setValue(IndexLoadingState());
 
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
 
     indexState.setValue(
       IndexSuccessState(

@@ -17,7 +17,7 @@ class LoginController {
   doLogin() async {
     loginState.setValue(LoginLoadingState());
 
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
 
     loginState.setValue(LoginSuccessState(jsonEncode(mock)));
   }

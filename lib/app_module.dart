@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcg_league/modules/deck_module/deck_module.dart';
 import 'package:tcg_league/modules/index_module/index_module.dart';
+import 'package:tcg_league/modules/join_module/join_module.dart';
 import 'package:tcg_league/modules/login_module/login_module.dart';
 
 class AppModule extends Module {
@@ -22,6 +23,11 @@ class AppModule extends Module {
     r.module(
       '/deck/',
       module: DeckModule(),
+      transition: TransitionType.rightToLeft,
+    );
+    r.module(
+      '/join/',
+      module: JoinModule(),
       transition: TransitionType.rightToLeft,
     );
   }

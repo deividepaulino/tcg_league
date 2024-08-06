@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:tcg_league/modules/deck_module/models/deck_model.dart';
+import 'package:tcg_league/modules/deck_module/view/widgets/deck_info_widget.dart';
 
 class DeckListChallangeList extends StatefulWidget {
   final List<DeckModel> decks;
@@ -23,7 +23,16 @@ class DeckListChallangeListState extends State<DeckListChallangeList> {
             itemCount: widget.decks.length,
             itemBuilder: (context, index) {
               return InkWell(
-                onTap: () {},
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return DeckInfoWidget(
+                        deck: widget.decks[index],
+                      );
+                    },
+                  );
+                },
                 child: Card(
                   child: ListTile(
                     title: Row(
@@ -59,6 +68,10 @@ class DeckListChallangeListState extends State<DeckListChallangeList> {
               );
             },
           ),
+        ),
+        ElevatedButton(
+          onPressed: () {},
+          child: const Text('Cadastrar deck'),
         ),
       ],
     );

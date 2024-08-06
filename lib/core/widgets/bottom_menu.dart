@@ -27,6 +27,9 @@ class _CustomBottomMenuState extends State<CustomBottomMenu> {
           if (i == 1) {
             Modular.to.pushNamedAndRemoveUntil('/deck/', (route) => false);
           }
+          if (i == 2) {
+            Modular.to.pushNamedAndRemoveUntil('/join/', (route) => false);
+          }
         }
       },
       items: [
@@ -41,14 +44,17 @@ class _CustomBottomMenuState extends State<CustomBottomMenu> {
           label: 'Decks',
         ),
         BottomNavigationBarItem(
+          backgroundColor: Theme.of(context).primaryColor,
           icon: Icon(Icons.add),
           label: 'Entrar',
         ),
         BottomNavigationBarItem(
+          backgroundColor: Theme.of(context).primaryColor,
           icon: Icon(Icons.history),
           label: 'Histórico',
         ),
         BottomNavigationBarItem(
+          backgroundColor: Theme.of(context).primaryColor,
           icon: Icon(Icons.person),
           label: 'Perfil',
         ),
