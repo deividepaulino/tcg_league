@@ -1,19 +1,14 @@
 import 'package:dio/dio.dart';
 
 class CustomDio {
-  final Dio _dio = Dio();
+  final Dio dio = Dio();
 
   CustomDio() {
-    _dio.options.baseUrl = 'https://jsonplaceholder.typicode.com';
-  }
+    dio.options.baseUrl = 'http://localhost:3000/';
 
-  Future get(String url) async {
-    try {
-      final response = await _dio.get(url);
-      return response.data;
-    } on DioException catch (e) {
-      print(e);
-      return null;
-    }
+    dio.interceptors.add(
+      LogInterceptor(
+          requestBody: true, responseBody: true, error: true, request: true),
+    );
   }
 }

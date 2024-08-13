@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcg_league/modules/login_module/controller/login_controller.dart';
 import 'package:tcg_league/modules/login_module/view/atoms/login_atoms.dart';
 import 'package:tcg_league/modules/login_module/view/states/login_states.dart';
+import 'package:tcg_league/modules/login_module/view/widgets/register_widget.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -63,7 +64,14 @@ class _LoginPageState extends State<LoginPage> {
             child: const Text('Login'),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return const RegisterWidget();
+                },
+              );
+            },
             child: const Text('Cadastrar'),
           ),
         ],
