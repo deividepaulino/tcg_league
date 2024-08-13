@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tcg_league/core/extensions/date_time_extension.dart';
 import 'package:tcg_league/modules/index_module/models/challanges_model.dart';
 import 'package:tcg_league/modules/index_module/view/widgets/challange_info.dart';
 import 'package:tcg_league/modules/index_module/view/widgets/live_challange_info.dart';
@@ -26,7 +25,7 @@ class IndexChallangeListState extends State<IndexChallangeList> {
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
-                  if (widget.challanges[index].challangeStatus == 'open') {
+                  if (widget.challanges[index].status == 'ativo') {
                     //open challange info
                     showDialog(
                       context: context,
@@ -36,8 +35,7 @@ class IndexChallangeListState extends State<IndexChallangeList> {
                         );
                       },
                     );
-                  } else if (widget.challanges[index].challangeStatus ==
-                      'live') {
+                  } else if (widget.challanges[index].status == 'live') {
                     //live challange
                     //TODO CHALLANGE LIVE INFO
                     showDialog(
@@ -63,15 +61,15 @@ class IndexChallangeListState extends State<IndexChallangeList> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          widget.challanges[index].challangeName,
+                          widget.challanges[index].torneioNome.toString(),
                           style: Theme.of(context).textTheme.titleSmall,
                         ),
                         Text(
-                          'Posiçao: ${widget.challanges[index].userPosition.toString()}',
+                          'Posiçao: ${widget.challanges[index].posicaoAtual.toString()}',
                           style: Theme.of(context).textTheme.displaySmall,
                         ),
                         Text(
-                          'Deck: ${widget.challanges[index].userDeck}',
+                          'Deck: ${widget.challanges[index].deckAtual}',
                           style: Theme.of(context).textTheme.displaySmall,
                         ),
                       ],
@@ -81,35 +79,27 @@ class IndexChallangeListState extends State<IndexChallangeList> {
                       children: [
                         Chip(
                           backgroundColor:
-                              (widget.challanges[index].challangeStatus ==
-                                      'open')
+                              (widget.challanges[index].status == 'aberto')
                                   ? Colors.blue
-                                  : (widget.challanges[index].challangeStatus ==
-                                          'live')
+                                  : (widget.challanges[index].status == 'live')
                                       ? Colors.green
                                       : Colors.grey,
-                          label: (widget.challanges[index].challangeStatus ==
-                                  'open')
+                          label: (widget.challanges[index].status == 'aberto')
                               ? const Text('Aberto',
                                   style: TextStyle(color: Colors.white))
-                              : (widget.challanges[index].challangeStatus ==
-                                      'live')
+                              : (widget.challanges[index].status == 'live')
                                   ? const Text('Jogando',
                                       style: TextStyle(color: Colors.white))
                                   : const Text('Fechado',
                                       style: TextStyle(color: Colors.white)),
                         ),
                         Text(
-                          widget.challanges[index].challangeType,
+                          widget.challanges[index].dataInicio ?? '',
+                          // .toBrazilianDateOnly(),
                           style: Theme.of(context).textTheme.displaySmall,
                         ),
                         Text(
-                          widget.challanges[index].challangeInitialDate
-                              .toBrazilianDateOnly(),
-                          style: Theme.of(context).textTheme.displaySmall,
-                        ),
-                        Text(
-                          'Players: ${widget.challanges[index].totalParticipants.toString()}',
+                          'Players: ${widget.challanges[index].quantidadeParticipantes.toString()}',
                           style: Theme.of(context).textTheme.displaySmall,
                         ),
                       ],
