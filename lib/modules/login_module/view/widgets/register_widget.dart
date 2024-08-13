@@ -1,9 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tcg_league/modules/login_module/models/login_model.dart';
 import 'package:tcg_league/modules/login_module/view/atoms/login_atoms.dart';
 import 'package:tcg_league/modules/login_module/view/login_page.dart';
+import 'package:tcg_league/modules/login_module/view/states/login_states.dart';
 
 class RegisterWidget extends StatefulWidget {
   const RegisterWidget({super.key});
@@ -94,7 +97,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                 },
               ),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (formKey.currentState!.validate()) {
                     registerUser.setValue(
                       LoginModel(
@@ -106,8 +109,18 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                       ),
                     );
 
-                    loginController.postUser();
-                    Modular.to.pop(context);
+                    await loginController.postUser();
+
+                    if (loginState.value is LoginInitialState) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Usuário cadastrado com sucesso'),
+                        ),
+                      );
+                      Modular.to.pop();
+                    } else {
+                      Modular.to.pop();
+                    }
                   }
                 },
                 child: const Text('Cadastrar'),

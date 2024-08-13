@@ -1,6 +1,5 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tcg_league/core/dio/custom_dio.dart';
 import 'package:tcg_league/modules/login_module/view/atoms/login_atoms.dart';
 import 'package:tcg_league/modules/login_module/view/states/login_states.dart';
@@ -8,19 +7,26 @@ import 'package:tcg_league/modules/login_module/view/states/login_states.dart';
 class LoginController {
   final Dio dio = CustomDio().dio;
 
-  //login mock
-  final Map<String, dynamic> mock = {
-    "email": "deivide@teste.com",
-    "password": "123456",
-    "token": "123"
-  };
-
   doLogin() async {
     loginState.setValue(LoginLoadingState());
 
-    await Future.delayed(const Duration(seconds: 1));
+    final res = await dio.post(
+      '/auth/login/',
+      data: {
+        "email": loginUser.value.email,
+        "senha": loginUser.value.password,
+      },
+    );
 
-    loginState.setValue(LoginSuccessState(jsonEncode(mock)));
+    if (res.statusCode == 201) {
+      final token = res.data['access_token'];
+
+      await _saveToken(token);
+
+      loginState.setValue(LoginSuccessState(token));
+    } else {
+      loginState.setValue(LoginErrorState(res.data));
+    }
   }
 
   postUser() async {
@@ -36,5 +42,14 @@ class LoginController {
     } else {
       loginState.setValue(LoginErrorState(res.data));
     }
+  }
+
+  _saveToken(String token) async {
+    //save on shared preferences the token
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.setString('token', token);
+
+    print('Token salvo  $token');
   }
 }
