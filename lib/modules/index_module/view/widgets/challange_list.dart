@@ -30,14 +30,15 @@ class IndexChallangeListState extends State<IndexChallangeList> {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return const ChallangeInfoWidget(
+                        return ChallangeInfoWidget(
                           isOpen: false,
+                          title:
+                              widget.challanges[index].torneioNome ?? 'unnamed',
                         );
                       },
                     );
                   } else if (widget.challanges[index].status == 'live') {
                     //live challange
-                    //TODO CHALLANGE LIVE INFO
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -48,8 +49,10 @@ class IndexChallangeListState extends State<IndexChallangeList> {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return const ChallangeInfoWidget(
+                        return ChallangeInfoWidget(
                           isOpen: false,
+                          title:
+                              widget.challanges[index].torneioNome ?? 'unnamed',
                         );
                       },
                     );

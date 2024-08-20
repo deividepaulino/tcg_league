@@ -1,24 +1,38 @@
+import 'package:asp/asp.dart';
 import 'package:flutter/material.dart';
+import 'package:tcg_league/modules/index_module/controller/index_controller.dart';
+import 'package:tcg_league/modules/index_module/view/atoms/index_atoms.dart';
 
 class ChallangeInfoWidget extends StatefulWidget {
   final bool isOpen;
-  const ChallangeInfoWidget({super.key, required this.isOpen});
+  final String title;
+  const ChallangeInfoWidget(
+      {super.key, required this.isOpen, required this.title});
 
   @override
   State<ChallangeInfoWidget> createState() => _ChallangeInfoWidgetState();
 }
 
 class _ChallangeInfoWidgetState extends State<ChallangeInfoWidget> {
+  final controller = IndexController();
+
+  @override
+  void initState() {
+    controller.getChallangeTable();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final state = context.select(() => challangeTableAtom.value);
+
     return Scaffold(
       body: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              //TODO TITULO DA LIGA
-              Text('Liga semanal'),
+              Text(widget.title),
               IconButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -27,12 +41,6 @@ class _ChallangeInfoWidgetState extends State<ChallangeInfoWidget> {
                   Icons.cancel,
                 ),
               ),
-            ],
-          ),
-          Row(
-            children: [
-              Text('Data inicial: 01/01/2021'),
-              Text('Data final: 01/01/2021'),
             ],
           ),
           Table(
@@ -81,42 +89,16 @@ class _ChallangeInfoWidgetState extends State<ChallangeInfoWidget> {
                   ),
                 ],
               ),
-              TableRow(
-                children: [
-                  const Text('1'),
-                  const Text('Jogador 1'),
-                  const Text('Deck 1'),
-                  const Text('2'),
-                  const Text('10'),
-                ],
-              ),
-              TableRow(
-                children: [
-                  const Text('2'),
-                  const Text('Jogador 2'),
-                  const Text('Deck 2'),
-                  const Text('1'),
-                  const Text('5'),
-                ],
-              ),
-              TableRow(
-                children: [
-                  const Text('3'),
-                  const Text('Jogador 3'),
-                  const Text('Deck 3'),
-                  const Text('0'),
-                  const Text('0'),
-                ],
-              ),
-              TableRow(
-                children: [
-                  const Text('4'),
-                  const Text('Jogador 4'),
-                  const Text('Deck 4'),
-                  const Text('0'),
-                  const Text('0'),
-                ],
-              ),
+              for (var i = 0; i < state.players.length; i++)
+                TableRow(
+                  children: [
+                    Text(state.players[i].position.toString()),
+                    Text(state.players[i].name),
+                    Text(state.players[i].deck.deckName),
+                    Text(state.players[i].wins.toString()),
+                    Text(state.players[i].points.toString()),
+                  ],
+                ),
             ],
           ),
           Row(

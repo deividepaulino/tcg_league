@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:tcg_league/core/dio/custom_dio.dart';
 import 'package:tcg_league/modules/index_module/models/challanges_model.dart';
 import 'package:tcg_league/modules/index_module/models/profile_model.dart';
+import 'package:tcg_league/modules/index_module/models/table_model.dart';
 import 'package:tcg_league/modules/index_module/view/atoms/index_atoms.dart';
 import 'package:tcg_league/modules/index_module/view/states/index_states.dart';
 
@@ -49,5 +50,19 @@ class IndexController {
 
   getProfileInfo() async {
     await Future.delayed(const Duration(seconds: 2));
+  }
+
+  getChallangeTable() async {
+    final res = await dio.get('/torneios/1/tabela');
+
+    if (res.statusCode == 200) {
+      challangeTableAtom.setValue(
+        TableModel.fromJson(res.data),
+      );
+    } else {
+      indexState.setValue(IndexErrorState(
+        res.data,
+      ));
+    }
   }
 }

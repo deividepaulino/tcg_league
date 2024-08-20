@@ -153,6 +153,7 @@ class _LiveChallangeInfoWidgetState extends State<LiveChallangeInfoWidget> {
                 builder: (BuildContext context) {
                   return const ChallangeInfoWidget(
                     isOpen: true,
+                    title: 'Torneio de teste',
                   );
                 },
               );
