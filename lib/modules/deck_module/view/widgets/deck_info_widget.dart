@@ -63,7 +63,7 @@ class _DeckInfoWidgetState extends State<DeckInfoWidget> {
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(
-                      '${widget.deck.deckList[index].cardName} x${widget.deck.deckList[index].cardQuantity}'),
+                      '${widget.deck.deckList[index].cardName} x${widget.deck.deckList[index].cardName}'),
                 );
               },
             ),

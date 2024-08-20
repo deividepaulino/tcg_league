@@ -1,12 +1,14 @@
 class DeckModel {
-  final String deckName;
-  final String deckFormat;
-  final String deckGame;
-  final int proxies;
-  final int totalCards;
-  final List<DeckCardModel> deckList;
+  int deckId;
+  String deckName;
+  String deckGame;
+  String deckFormat;
+  int totalCards;
+  int proxies;
+  List<CardModel> deckList;
 
   DeckModel({
+    required this.deckId,
     required this.deckName,
     required this.deckFormat,
     required this.deckGame,
@@ -17,30 +19,33 @@ class DeckModel {
 
   factory DeckModel.fromJson(Map<String, dynamic> json) {
     return DeckModel(
+      deckId: json['id'],
       deckName: json['deck_name'],
       deckFormat: json['deck_format'],
       deckGame: json['deck_game'],
-      proxies: json['proxies'],
-      totalCards: json['total_cards'],
-      deckList: List<DeckCardModel>.from(
-        json['deck_list'].map((x) => DeckCardModel.fromJson(x)),
+      proxies: json['proxy_quantity'],
+      totalCards: json['card_quantity'],
+      deckList: List<CardModel>.from(
+        json['cards'].map((x) => CardModel.fromJson(x)),
       ),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      'id': deckId,
       'deck_name': deckName,
       'deck_format': deckFormat,
       'deck_game': deckGame,
-      'proxies': proxies,
-      'total_cards': totalCards,
-      'deck_list': deckList.map((x) => x.toJson()).toList(),
+      'proxy_quantity': proxies,
+      'card_quantity': totalCards,
+      'cards': deckList.map((x) => x.toJson()).toList(),
     };
   }
 
   factory DeckModel.empty() {
     return DeckModel(
+      deckId: -1,
       deckName: '',
       deckFormat: '',
       deckGame: '',
@@ -51,43 +56,43 @@ class DeckModel {
   }
 }
 
-class DeckCardModel {
+class CardModel {
+  int cardId;
   String cardName;
-  int cardQuantity;
-  int proxies;
   String cardCode;
+  int type;
 
-  DeckCardModel({
+  CardModel({
+    required this.cardId,
     required this.cardName,
-    required this.cardQuantity,
-    required this.proxies,
     required this.cardCode,
+    required this.type,
   });
 
-  factory DeckCardModel.fromJson(Map<String, dynamic> json) {
-    return DeckCardModel(
-      cardName: json['card_name'],
-      cardQuantity: json['card_quantity'],
-      proxies: json['proxies'],
-      cardCode: json['card_code'],
+  factory CardModel.fromJson(Map<String, dynamic> json) {
+    return CardModel(
+      cardId: json['id'],
+      cardName: json['name'],
+      cardCode: json['code'],
+      type: json['type'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'card_name': cardName,
-      'card_quantity': cardQuantity,
-      'proxies': proxies,
-      'card_code': cardCode,
+      'id': cardId,
+      'name': cardName,
+      'code': cardCode,
+      'type': type,
     };
   }
 
-  factory DeckCardModel.empty() {
-    return DeckCardModel(
+  factory CardModel.empty() {
+    return CardModel(
+      cardId: 0,
       cardName: '',
-      cardQuantity: 0,
-      proxies: 0,
       cardCode: '',
+      type: 0,
     );
   }
 }
