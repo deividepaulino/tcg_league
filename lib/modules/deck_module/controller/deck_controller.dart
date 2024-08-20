@@ -33,4 +33,15 @@ class DeckController {
   getProfileInfo() async {
     await Future.delayed(const Duration(seconds: 1));
   }
+
+  postDeck() {
+    deckState.setValue(DeckLoadingState());
+
+    dio.post('/decks', data: deckPostAtom.value.toJson()).then((res) {
+      if (res.statusCode != 201) {
+        deckState.setValue(DeckErrorState('Erro ao criar deck'));
+        return;
+      }
+    });
+  }
 }

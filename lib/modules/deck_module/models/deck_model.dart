@@ -1,5 +1,6 @@
 class DeckModel {
-  int deckId;
+  int? deckId;
+  int? userId;
   String deckName;
   String deckGame;
   String deckFormat;
@@ -8,7 +9,8 @@ class DeckModel {
   List<CardModel> deckList;
 
   DeckModel({
-    required this.deckId,
+    this.deckId,
+    this.userId,
     required this.deckName,
     required this.deckFormat,
     required this.deckGame,
@@ -20,6 +22,7 @@ class DeckModel {
   factory DeckModel.fromJson(Map<String, dynamic> json) {
     return DeckModel(
       deckId: json['id'],
+      userId: json['usuario'],
       deckName: json['deck_name'],
       deckFormat: json['deck_format'],
       deckGame: json['deck_game'],
@@ -34,6 +37,7 @@ class DeckModel {
   Map<String, dynamic> toJson() {
     return {
       'id': deckId,
+      'usuario': userId,
       'deck_name': deckName,
       'deck_format': deckFormat,
       'deck_game': deckGame,

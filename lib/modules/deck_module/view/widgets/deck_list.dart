@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tcg_league/modules/deck_module/models/deck_model.dart';
 import 'package:tcg_league/modules/deck_module/view/widgets/deck_info_widget.dart';
+import 'package:tcg_league/modules/deck_module/view/widgets/deck_register_widget.dart';
 
 class DeckListChallangeList extends StatefulWidget {
   final List<DeckModel> decks;
@@ -70,7 +71,14 @@ class DeckListChallangeListState extends State<DeckListChallangeList> {
           ),
         ),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return const DeckRegisterWidget();
+              },
+            );
+          },
           child: const Text('Cadastrar deck'),
         ),
       ],
